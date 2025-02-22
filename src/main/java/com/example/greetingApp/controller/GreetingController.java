@@ -1,8 +1,7 @@
 package com.example.greetingApp.controller;
 
 import com.example.greetingApp.model.GreetingModel;
-import com.example.greetingApp.model.ServiceGreet;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.greetingApp.service.ServiceGreet;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,6 +32,12 @@ public class GreetingController {
     private  ServiceGreet greetings;
    public  GreetingController(ServiceGreet greetings){
        this.greetings = greetings;
+   }
+   //user first name and last name
+   @GetMapping("/hello")
+   public GreetingModel sayHello(@RequestParam (required = false) String firstName, @RequestParam(required = false)String lastName) {
+       String message = greetings.getServiceGreet(firstName, lastName);
+       return  new GreetingModel(message);
    }
 
 }
