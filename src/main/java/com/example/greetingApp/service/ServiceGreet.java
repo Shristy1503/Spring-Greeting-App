@@ -5,6 +5,7 @@ import com.example.greetingApp.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceGreet {
@@ -39,5 +40,10 @@ public class ServiceGreet {
     //method to get all the greetings
     public List<GreetingEntity> getAllGreetings() {
         return greetingRepository.findAll();
+    }
+
+    //method to get greeting by id
+    public Optional<GreetingEntity> getGreetingById(Long id){
+        return greetingRepository.findById(id);
     }
 }
