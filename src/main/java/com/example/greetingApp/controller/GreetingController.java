@@ -3,6 +3,8 @@ package com.example.greetingApp.controller;
 import com.example.greetingApp.entity.GreetingEntity;
 import com.example.greetingApp.model.GreetingModel;
 import com.example.greetingApp.service.ServiceGreet;
+import org.apache.coyote.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -58,5 +60,13 @@ public class GreetingController {
     @GetMapping("/find/{id}")
     public Optional<GreetingEntity> getGreetingWithId(@PathVariable Long id){
        return greetings.getGreetingById(id);
+    }
+
+    //edit message in repository
+    @PutMapping("/update/{id}")
+    public ResponseEntity<GreetingEntity> editGreeting(@PathVariable Long id, @RequestBody GreetingEntity updatedGreeting){
+       GreetingEntity update = greetings.editAGreetingMessage(id, updatedGreeting.getMessage());
+       return ResponseEntity.ok(update);
+
     }
 }

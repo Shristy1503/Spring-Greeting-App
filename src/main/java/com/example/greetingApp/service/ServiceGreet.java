@@ -46,4 +46,17 @@ public class ServiceGreet {
     public Optional<GreetingEntity> getGreetingById(Long id){
         return greetingRepository.findById(id);
     }
+
+    //method to edit Message
+    public GreetingEntity editAGreetingMessage(Long id,String message){
+        Optional<GreetingEntity> entityOptional = getGreetingById(id);
+        if(entityOptional.isPresent()){
+            GreetingEntity entity = entityOptional.get();
+            entity.setMessage(message);
+            return greetingRepository.save(entity);
+        }
+        else{
+            throw new RuntimeException("Greeting with ID " + id + " not found");
+        }
+    }
 }
