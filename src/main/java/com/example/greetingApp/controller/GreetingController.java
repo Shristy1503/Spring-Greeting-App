@@ -1,8 +1,10 @@
 package com.example.greetingApp.controller;
 
+import com.example.greetingApp.entity.GreetingEntity;
 import com.example.greetingApp.model.GreetingModel;
 import com.example.greetingApp.service.ServiceGreet;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/greet")
@@ -39,5 +41,16 @@ public class GreetingController {
        String message = greetings.getServiceGreet(firstName, lastName);
        return  new GreetingModel(message);
    }
+
+   //save methods in repository
+    @PutMapping("/save")
+    public GreetingEntity saveGreetings(@RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName){
+        return greetings.saveGreetingRepository(firstName,lastName);
+    }
+
+    @GetMapping("/all")
+    public List<GreetingEntity> getAllGreetings(){
+        return greetings.getAllGreetings();
+    }
 
 }
