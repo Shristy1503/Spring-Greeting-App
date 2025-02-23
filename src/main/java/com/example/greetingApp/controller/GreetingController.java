@@ -43,7 +43,7 @@ public class GreetingController {
        return  new GreetingModel(message);
    }
 
-   //save methods in repository
+   ////save methods in repository
     @PutMapping("/save")
     public GreetingEntity saveGreetings(@RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName){
         return greetings.saveGreetingRepository(firstName,lastName);
